@@ -11,42 +11,64 @@ module.exports = {
     module: {
         loaders: [
             { test: /\.(png|woff|woff2|eot|ttf|svg)$/, loader: 'url-loader?limit=100000' },
-            { test: /\.css/, loader: extractCSS.extract(['css']) },
+            { test: /\.scss$/i, loader: extractCSS.extract(['css?minimize','sass']) },
             { test: /\.json$/, loader: 'json-loader' }
         ]
     },
     entry: {
+        // polyfills: [
+        //     'core-js/es6/symbol',
+        //     'core-js/es6/object',
+        //     'core-js/es6/function',
+        //     'core-js/es6/parse-int',
+        //     'core-js/es6/parse-float',
+        //     'core-js/es6/number',
+        //     'core-js/es6/math',
+        //     'core-js/es6/string',
+        //     'core-js/es6/date',
+        //     'core-js/es6/array',
+        //     'core-js/es6/regexp',
+        //     'core-js/es6/map',
+        //     'core-js/es6/set',
+        //     'core-js/es6/reflect',
+        //     'core-js/es7/reflect',
+        //     'zone.js/dist/zone'
+        // ],
         vendor: [
-            'font-awesome/css/font-awesome.css',
-            'bootstrap/dist/css/bootstrap.css',
-            'style-loader',
-            '@angular/common',
-            '@angular/compiler',
-            '@angular/core',
-            '@angular/http',
-            '@angular/forms',
-            '@angular/platform-browser',
-            '@angular/platform-browser-dynamic',
-            '@angular/router'
+            'font-awesome/scss/font-awesome.scss',
+            'bootstrap/scss/bootstrap.scss',
+            // '@angular/common',
+            // '@angular/compiler',
+            // '@angular/core',
+            // '@angular/http',
+            // '@angular/forms',
+            // '@angular/platform-browser',
+            // '@angular/platform-browser-dynamic',
+            // '@angular/router'
         ]
     },
     output: {
         path: path.join(__dirname, '../wwwroot', 'dist'),
-        filename: '[name].js',
+        filename: '[name].css',
         library: '[name]_[hash]',
     },
     plugins: [
         extractCSS,
         new webpack.optimize.OccurrenceOrderPlugin(),
-        new webpack.DllPlugin({
-            path: path.join(__dirname, '../wwwroot', 'dist', '[name]-manifest.json'),
-            name: '[name]_[hash]'
-        })
+        // To eliminate warning
+        // https://github.com/AngularClass/angular2-webpack-starter/issues/993
+        new webpack.ContextReplacementPlugin(
+            /angular(\\|\/)core(\\|\/)(esm(\\|\/)src|src)(\\|\/)linker/,
+            __dirname
+        ),
+        // new webpack.DllPlugin({
+        //     path: path.join(__dirname, '../wwwroot', 'dist', '[name]-manifest.json'),
+        //     name: '[name]_[hash]'
+        // })
     ].concat(isDevelopment ? [] : [
-        new webpack.optimize.UglifyJsPlugin({
-            compress: { warnings: false },
-            minimize: true,
-            mangle: false // Due to https://github.com/angular/angular/issues/6678
-        })
-    ])
+            new webpack.optimize.UglifyJsPlugin({
+                beautify: false,
+                comments: false
+            }) 
+           ])
 };

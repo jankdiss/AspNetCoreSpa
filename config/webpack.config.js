@@ -36,7 +36,9 @@ module.exports = merge({
             }]
     },
     entry: {
-        main: ['./Client/boot-client.ts']
+        'polyfills': './Client/polyfills.ts',
+        'vendor':    './Client/vendor.ts',
+        'main': './Client/boot-client.ts'
     },
     output: {
         path: path.join(__dirname, '../wwwroot', 'dist'),
@@ -46,9 +48,23 @@ module.exports = merge({
     profile: true,
     plugins: [
         extractCSS,
-        new webpack.DllReferencePlugin({
-            context: __dirname,
-            manifest: require('../wwwroot/dist/vendor-manifest.json')
+        new webpack.optimize.OccurrenceOrderPlugin(),
+        // new webpack.DllReferencePlugin({
+        //     context: __dirname,
+        //     manifest: require('../wwwroot/dist/polyfills-manifest.json')
+        // }),
+        // new webpack.DllReferencePlugin({
+        //     context: __dirname,
+        //     manifest: require('../wwwroot/dist/vendor-manifest.json')
+        // }),
+        // To eliminate warning
+        // https://github.com/AngularClass/angular2-webpack-starter/issues/993
+        new webpack.ContextReplacementPlugin(
+            /angular(\\|\/)core(\\|\/)(esm(\\|\/)src|src)(\\|\/)linker/,
+            __dirname
+        ),
+        new webpack.optimize.CommonsChunkPlugin({
+            name: ['polyfills', 'vendor'].reverse()
         }),
         new webpack.DefinePlugin({
             'process.env': {
