@@ -20,11 +20,10 @@ import { DataService } from './services/data.service';
 import { ApiGatewayService } from './services/api-gateway.service';
 import { AuthService } from './services/auth.service';
 import { HttpErrorHandlerService } from './services/http-error-handler.service';
-// import { WikipediaService } from './services/wikipedia.service';
 import { ApiTranslationLoader } from './services/api-translation-loader.service';
 import { ContentService } from './services/content.service';
 import { UtilityService } from './services/utility.service';
-// import { UppercasePipe } from './pipes';
+import { UppercasePipe } from './pipes/uppercase.pipe';
 
 @NgModule({
   imports: [
@@ -46,7 +45,7 @@ import { UtilityService } from './services/utility.service';
     FooterComponent,
     HeaderComponent,
     PageHeadingComponent,
-    // UppercasePipe
+    UppercasePipe
   ],
   exports: [
     // Modules
@@ -64,7 +63,7 @@ import { UtilityService } from './services/utility.service';
     FooterComponent,
     HeaderComponent,
     PageHeadingComponent,
-    // UppercasePipe
+    UppercasePipe
   ]
 
 })
@@ -80,8 +79,7 @@ export class SharedModule {
         DataService,
         ContentService,
         FormControlService,
-        UtilityService,
-        // WikipediaService
+        UtilityService
       ]
     };
   }
