@@ -1,4 +1,4 @@
-// import './polyfills';
+import './polyfills';
 // import './vendor';
 
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
