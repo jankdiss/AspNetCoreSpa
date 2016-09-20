@@ -9,10 +9,10 @@ var isDevelopment = process.env.ASPNETCORE_ENVIRONMENT === 'Development';
 
 module.exports = merge({
     resolve: {
-        extensions: ['', '.js', '.ts']
+        extensions: ['.js', '.ts']
     },
     module: {
-        loaders: [
+        rules: [
             { test: /\.ts$/, exclude: [/\.(spec|e2e)\.ts$/], loaders: ['awesome-typescript-loader', 'angular2-template-loader'] },
             { test: /\.html$/, loader: "html" },
             { test: /\.css/, loader: extractCSS.extract(['css']) },
