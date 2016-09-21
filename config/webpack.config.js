@@ -46,7 +46,6 @@ module.exports = merge({
     profile: true,
     plugins: [
         extractCSS,
-        new webpack.optimize.OccurrenceOrderPlugin(),
         new webpack.DllReferencePlugin({
             context: __dirname,
             manifest: require('../wwwroot/dist/vendor-manifest.json')

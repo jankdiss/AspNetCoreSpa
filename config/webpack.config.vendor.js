@@ -54,7 +54,6 @@ module.exports = {
     },
     plugins: [
         extractCSS,
-        new webpack.optimize.OccurrenceOrderPlugin(),
         // To eliminate warning
         // https://github.com/AngularClass/angular2-webpack-starter/issues/993
         new webpack.ContextReplacementPlugin(
