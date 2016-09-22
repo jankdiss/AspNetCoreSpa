@@ -112,7 +112,7 @@
     "karma-phantomjs-launcher": "1.0.1",
     "karma-source-map-support": "^1.1.0",
     "karma-sourcemap-loader": "0.3.7",
-    "karma-webpack": "1.7.0",
+    "karma-webpack": "1.8.0",
     "node-sass": "3.9.3",
     "parse5": "2.1.5",
     "phantomjs-polyfill": "0.0.2",
@@ -131,7 +131,7 @@
     "typedoc": "0.4.5",
     "typescript": "2.0.2",
     "url-loader": "0.5.7",
-    "webpack": "2.1.0-beta.24",
+    "webpack": "2.1.0-beta.25",
     "webpack-externals-plugin": "1.0.0",
     "webpack-hot-middleware": "2.12.2",
     "webpack-md5-hash": "0.0.5"
