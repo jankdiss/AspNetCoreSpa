@@ -31,7 +31,7 @@ import { UppercasePipe } from './pipes/uppercase.pipe';
     FormsModule,
     ReactiveFormsModule,
     RouterModule,
-    NgbModule,
+    NgbModule.forRoot(),
     // No need to export as these modules don't expose any components/directive etc'
     HttpModule,
     JsonpModule,
